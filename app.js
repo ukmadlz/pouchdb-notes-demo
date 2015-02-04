@@ -33,6 +33,21 @@ $('#cloudant-details').on('submit',function(){
   }
 
   /*
+    Little hack for when the hash is changed
+   */
+  $(window).on('hashchange', function() {
+   var dbname = window.location.hash.substring(1);
+   // Validate DBNAME
+   if(dbname=="") {
+     alert('Please provide a URL hash as the dbname');
+     window.location.href = "#exampledbname";
+   }
+   console.log(dbname);
+   var db = new PouchDB(dbname);
+  });
+
+
+  /*
     Initialise PouchDB
    */
   var db = new PouchDB(dbname);
